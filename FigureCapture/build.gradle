@@ -14,7 +14,7 @@ repositories {
 
 android {
     compileSdkVersion 18
-    buildToolsVersion "18.1.0"
+    buildToolsVersion '18.1.0'
 
     defaultConfig {
         minSdkVersion 14
@@ -22,6 +22,30 @@ android {
     }
 }
 
+configurations {
+    apt
+}
+
 dependencies {
-	compile 'com.android.support:support-v4:+'
+    compile 'com.android.support:support-v4:+'
+    apt 'com.googlecode.androidannotations:androidannotations:2.7.1'
+    compile 'com.googlecode.androidannotations:androidannotations-api:2.7.1'
+}
+
+android.applicationVariants.all { variant ->
+    def aptOutput = file("${project.buildDir}/source/r/${variant.dirName}")
+    variant.javaCompile.doFirst {
+        aptOutput.mkdirs()
+        aptOutput.eachFileRecurse groovy.io.FileType.FILES, {
+            if (it.name.equals('R.java')) {
+                return
+            }
+            it.delete()
+        }
+        variant.javaCompile.options.compilerArgs += [
+                '-processorpath', configurations.apt.getAsPath(),
+                '-AandroidManifestFile=' + variant.processResources.manifestFile,
+                '-s', aptOutput
+        ]
+    }
 }
