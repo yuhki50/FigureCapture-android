@@ -1,4 +1,4 @@
-package com.yuhki50.android.figurecapture;
+package com.yuhki50.android.figurecapture.fragment;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -18,9 +18,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.googlecode.androidannotations.annotations.AfterInject;
 import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.EFragment;
+import com.yuhki50.android.figurecapture.R;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -32,7 +32,7 @@ public class NavigationDrawerFragment extends Fragment {
     /**
      * Tag for logger.
      */
-    private final String TAG = NavigationDrawerFragment.class.getSimpleName();
+    private static final String TAG = NavigationDrawerFragment.class.getSimpleName();
 
     /**
      * Remember the position of the selected item.
@@ -85,35 +85,6 @@ public class NavigationDrawerFragment extends Fragment {
 
         // Indicate that this fragment would like to influence the set of actions in the action bar.
         setHasOptionsMenu(true);
-    }
-
-    /*
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mDrawerListView = (ListView) inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
-        mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectItem(position);
-            }
-        });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                getActionBar().getThemedContext(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                new String[]{
-                        getString(R.string.title_section1),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
-                }));
-        mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-        return mDrawerListView;
-    }
-    */
-
-    @AfterInject
-    protected void calledAfterInjection() {
-
     }
 
     @AfterViews

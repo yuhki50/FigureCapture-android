@@ -4,27 +4,30 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.googlecode.androidannotations.annotations.AfterInject;
 import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.FragmentById;
 import com.googlecode.androidannotations.annotations.OptionsItem;
+import com.yuhki50.android.figurecapture.fragment.CaptureFragment_;
+import com.yuhki50.android.figurecapture.fragment.NavigationDrawerFragment;
+import com.yuhki50.android.figurecapture.fragment.SubmitFragment_;
+import com.yuhki50.android.figurecapture.fragment.ThumbnailFragment_;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
     /**
      * Tag for logger.
      */
-    private final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -37,25 +40,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
      */
     private CharSequence mTitle;
 
-    /*
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
-
-        // Set up the drawer.
-        mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
-    }
-    */
-
-    @AfterInject
-    protected void calledAfterInjection() {
-
-    }
-
     @AfterViews
     protected void calledAfterViewInjection() {
         mTitle = getTitle();
@@ -66,11 +50,30 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
+        /*
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                 .commit();
+        */
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        switch (position) {
+            case 0:
+                fragmentTransaction.replace(R.id.container, new CaptureFragment_());
+                break;
+            case 1:
+                fragmentTransaction.replace(R.id.container, new ThumbnailFragment_());
+                break;
+            case 2:
+                fragmentTransaction.replace(R.id.container, new SubmitFragment_());
+                break;
+        }
+
+        fragmentTransaction.commit();
     }
 
     public void onSectionAttached(int number) {
@@ -107,20 +110,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         return super.onCreateOptionsMenu(menu);
     }
 
-    /*
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-    */
-
     @OptionsItem(R.id.action_login)
     protected void actionLoginSelected() {
         Toast.makeText(this, "actionLoginSelected", Toast.LENGTH_SHORT).show();
@@ -140,6 +129,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
     protected void actionHelpSelected() {
         Toast.makeText(this, "actionHelpSelected", Toast.LENGTH_SHORT).show();
     }
+
 
     /**
      * A placeholder fragment containing a simple view.
@@ -166,9 +156,10 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+            View rootView = inflater.inflate(R.layout.fragment_submit, container, false);
+
+//            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+//            textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
 
