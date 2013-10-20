@@ -8,28 +8,56 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.googlecode.androidannotations.annotations.AfterInject;
+import com.googlecode.androidannotations.annotations.AfterViews;
+import com.googlecode.androidannotations.annotations.EActivity;
+import com.googlecode.androidannotations.annotations.FragmentById;
+import com.googlecode.androidannotations.annotations.OptionsItem;
+
+@EActivity(R.layout.activity_main)
 public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+    /**
+     * Tag for logger.
+     */
+    private final String TAG = MainActivity.class.getSimpleName();
+
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
-    private NavigationDrawerFragment mNavigationDrawerFragment;
+    @FragmentById(R.id.navigation_drawer)
+    protected NavigationDrawerFragment mNavigationDrawerFragment;
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
 
+    /*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
+        mTitle = getTitle();
+
+        // Set up the drawer.
+        mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+    }
+    */
+
+    @AfterInject
+    protected void calledAfterInjection() {
+
+    }
+
+    @AfterViews
+    protected void calledAfterViewInjection() {
         mTitle = getTitle();
 
         // Set up the drawer.
@@ -66,7 +94,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         actionBar.setTitle(mTitle);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
@@ -80,6 +107,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         return super.onCreateOptionsMenu(menu);
     }
 
+    /*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -91,20 +119,39 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         }
         return super.onOptionsItemSelected(item);
     }
+    */
+
+    @OptionsItem(R.id.action_login)
+    protected void actionLoginSelected() {
+        Toast.makeText(this, "actionLoginSelected", Toast.LENGTH_SHORT).show();
+    }
+
+    @OptionsItem(R.id.action_change_camera)
+    protected void actionChangeCameraSelected() {
+        Toast.makeText(this, "actionChangeCameraSelected", Toast.LENGTH_SHORT).show();
+    }
+
+    @OptionsItem(R.id.action_settings)
+    protected void actionSettingsSelected() {
+        Toast.makeText(this, "actionSettingsSelected", Toast.LENGTH_SHORT).show();
+    }
+
+    @OptionsItem(R.id.action_help)
+    protected void actionHelpSelected() {
+        Toast.makeText(this, "actionHelpSelected", Toast.LENGTH_SHORT).show();
+    }
 
     /**
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
         /**
-         * The fragment argument representing the section number for this
-         * fragment.
+         * The fragment argument representing the section number for this fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
 
         /**
-         * Returns a new instance of this fragment for the given section
-         * number.
+         * Returns a new instance of this fragment for the given section number.
          */
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
