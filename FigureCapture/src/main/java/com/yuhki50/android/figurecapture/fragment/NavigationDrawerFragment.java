@@ -28,7 +28,7 @@ import com.yuhki50.android.figurecapture.R;
  * design guidelines</a> for a complete explanation of the behaviors implemented here.
  */
 @EFragment(R.layout.fragment_navigation_drawer)
-public class NavigationDrawerFragment extends Fragment {
+public class NavigationDrawerFragment extends BaseFragment {
     /**
      * Tag for logger.
      */
