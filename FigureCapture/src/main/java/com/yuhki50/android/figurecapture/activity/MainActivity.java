@@ -1,16 +1,11 @@
 package com.yuhki50.android.figurecapture.activity;
 
 import android.app.ActionBar;
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.os.Bundle;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.widget.DrawerLayout;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.googlecode.androidannotations.annotations.AfterViews;
@@ -51,44 +46,24 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        /*
-        // update the main content by replacing fragments
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
-        */
-
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
         switch (position) {
             case 0:
+                mTitle = getString(R.string.title_section1);
                 fragmentTransaction.replace(R.id.container, new CaptureFragment_());
                 break;
             case 1:
+                mTitle = getString(R.string.title_section2);
                 fragmentTransaction.replace(R.id.container, new ThumbnailFragment_());
                 break;
             case 2:
+                mTitle = getString(R.string.title_section3);
                 fragmentTransaction.replace(R.id.container, new SubmitFragment_());
                 break;
         }
 
         fragmentTransaction.commit();
-    }
-
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
-        }
     }
 
     public void restoreActionBar() {
@@ -128,46 +103,6 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
     @OptionsItem(R.id.action_help)
     protected void actionHelpSelected() {
-        Toast.makeText(this, "actionHelpSelected", Toast.LENGTH_SHORT).show();
-    }
-
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_submit, container, false);
-
-//            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-//            textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
-        }
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/yuhki50/FigureCapture-android")));
     }
 }

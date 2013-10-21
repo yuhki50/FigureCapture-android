@@ -2,7 +2,6 @@ package com.yuhki50.android.figurecapture.fragment;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -160,8 +159,7 @@ public class NavigationDrawerFragment extends BaseFragment {
                     // The user manually opened the drawer; store this flag to prevent auto-showing
                     // the navigation drawer automatically in the future.
                     mUserLearnedDrawer = true;
-                    SharedPreferences sp = PreferenceManager
-                            .getDefaultSharedPreferences(getActivity());
+                    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
                     sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).apply();
                 }
 

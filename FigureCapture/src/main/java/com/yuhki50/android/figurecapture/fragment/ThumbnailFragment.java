@@ -32,8 +32,8 @@ public class ThumbnailFragment extends BaseFragment {
     }
 
     @Override
-    public void onAttach(Activity act) {
-        super.onAttach(act);
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
     }
 
     @Override

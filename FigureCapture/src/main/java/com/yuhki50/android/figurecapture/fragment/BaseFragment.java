@@ -12,8 +12,8 @@ public abstract class BaseFragment extends Fragment {
     private static final String TAG = BaseFragment.class.getSimpleName();
 
 
-    public void onAttach(Activity act) {
-        super.onAttach(act);
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
         Log.d(TAG, "Fragment-onAttach");
     }
 
