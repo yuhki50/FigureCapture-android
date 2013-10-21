@@ -1,4 +1,4 @@
-package com.yuhki50.android.figurecapture;
+package com.yuhki50.android.figurecapture.activity;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -17,13 +17,14 @@ import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.FragmentById;
 import com.googlecode.androidannotations.annotations.OptionsItem;
+import com.yuhki50.android.figurecapture.R;
 import com.yuhki50.android.figurecapture.fragment.CaptureFragment_;
 import com.yuhki50.android.figurecapture.fragment.NavigationDrawerFragment;
 import com.yuhki50.android.figurecapture.fragment.SubmitFragment_;
 import com.yuhki50.android.figurecapture.fragment.ThumbnailFragment_;
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class MainActivity extends BaseActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
     /**
      * Tag for logger.
      */
