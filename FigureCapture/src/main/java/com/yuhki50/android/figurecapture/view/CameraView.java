@@ -75,7 +75,6 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
         camera.setParameters(parameters);
     }
 
-    /*
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         // We purposely disregard child measurements because act as a wrapper to
@@ -88,7 +87,6 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
             mPreviewSize = getOptimalPreviewSize(mSupportedPreviewSizes, width, height);
         }
     }
-    */
 
     /*
     @Override
@@ -135,7 +133,6 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
             mCamera.stopPreview();
         }
     }
-
 
     private Size getOptimalPreviewSize(List<Size> sizes, int w, int h) {
         final double ASPECT_TOLERANCE = 0.1;
