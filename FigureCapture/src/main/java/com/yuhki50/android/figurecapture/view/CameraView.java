@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 
 import java.io.IOException;
 import java.util.List;
@@ -88,9 +89,9 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
-    /*
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        /*
         if (changed && getChildCount() > 0) {
             final View child = getChildAt(0);
 
@@ -113,8 +114,8 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
                 child.layout(0, (height - scaledChildHeight) / 2, width, (height + scaledChildHeight) / 2);
             }
         }
+        */
     }
-    */
 
     public void surfaceCreated(SurfaceHolder holder) {
         // The Surface has been created, acquire the camera and tell it where to draw.
